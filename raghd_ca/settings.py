@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import socket
 from pathlib import Path
+
+from raghd_ca import docker_config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-og8--83jm_iw1@8f%f%#@@lklilg2pf@b11qf!0bea%#3=!o2^'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+DEBUG = True
 
 ALLOWED_HOSTS = ['.ray-app.store', 'localhost']
 
@@ -145,3 +145,24 @@ LEAFLET_CONFIG = {
     'SCALE': None,
     'OPACITY': 0.5,
 }
+
+
+if socket.gethostname()=="RAY":
+    DATABASES["default"]["HOST"] = "localhost"
+    DATABASES["default"]["PORT"] = docker_config.POSTGIS_PORT
+else:
+    DATABASES["default"]["HOST"] ="wmap_postgis"
+    DATABASES["default"]["PORT"] = 5432
+# Set DEPLOY_SECURE to True only for LIVE deployment
+if docker_config.DEPLOY_SECURE:
+    DEBUG = False
+    TEMPLATES[0]["OPTIONS"]["debug"] = False
+# ALLOWED_HOSTS = ['.your-domain-name.xyz','localhost',]
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+else:
+    DEBUG = True
+    TEMPLATES[0]["OPTIONS"]["debug"] = True
+    ALLOWED_HOSTS = ['*', ]
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False

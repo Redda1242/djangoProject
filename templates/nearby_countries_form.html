@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Find Nearby Countries</h2>
+<form action="{% url 'find_nearby_countries' %}" method="get">
+  <label for="lat">Latitude:</label>
+  <input type="text" id="lat" name="lat" required>
+
+  <label for="lon">Longitude:</label>
+  <input type="text" id="lon" name="lon" required>
+
+  <label for="distance">Distance (in meters):</label>
+  <input type="text" id="distance" name="distance" required>
+
+  <button type="submit">Search</button>
+</form>
+{% endblock %}

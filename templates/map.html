@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+  #mapid { height: 400px; }  /* Set a height for the map */
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<div id="mapid"></div>  <!-- Map container -->
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+  // Initialize the map
+  var mymap = L.map('mapid').setView([25.0330, 121.5654], 13);  // Set the coordinates and zoom level
+
+  // Add OpenStreetMap tiles to the map
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(mymap);
+
+  // Add a marker to the map (optional)
+  L.marker([25.0330, 121.5654]).addTo(mymap)
+    .bindPopup('----.<br> Easily customizable.')
+    .openPopup();
+</script>
+{% endblock extra_js %}

@@ -1,4 +1,11 @@
+
+
 # djangoProject
+
+![image](https://github.com/Redda1242/djangoProject/assets/98473766/7202a907-6146-45d3-b514-a002e80e57be)
+
+![image](https://github.com/Redda1242/djangoProject/assets/98473766/49b85168-9771-443b-8ad8-cb3548f697b8)
+
 
 ![image](https://github.com/Redda1242/djangoProject/assets/98473766/ec9dfbd1-d7e9-43a6-afa5-d0f1b153dd92)
 
